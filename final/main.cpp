@@ -134,8 +134,9 @@ void special_function() {
         printf("special function %d\n", function_control);
         while (function_control == 0 && preDataL != dataUpdateL) {
             preDataL = dataUpdateL;
-            if (X1 < 75 || X1 > 85) {
-                double ratio = X1 / 160.0;
+            int Center = (X1 + X2) / 2;
+            if (Center < 75 || Center > 85) {
+                double ratio = Center / 160.0;
                 double left_speed = total_speed * ratio;
                 double right_speed = total_speed - left_speed;
                 //printf("left: %f right: %f\n", left_speed, right_speed);
