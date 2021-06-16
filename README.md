@@ -7,6 +7,7 @@ final
     * `$ cd ee2405/mbed_final/final`
     4. Connect the wire as below picture.
     ![image](https://github.com/chenjunhao0315/mbed_hw4/blob/master/IMG_1823.jpg)
+    6. Revise the program with `bbcar.h bbcar.cpp` if the bbcar is default
     5. Compile the program.
     * `$ sudo mbed compile --source . --source ~/ee2405/mbed-os-build/ -m B_L4S5I_IOT01A -t GCC_ARM -f`
     6. Connect pc with Openmv.
