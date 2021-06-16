@@ -34,6 +34,7 @@ int TX, TY, TZ, RX, RY, RZ;
 int ID, X1, X2, Y1, Y2, THETA, RHO;
 int counter = 0;
 int dataUpdateL = 0, dataUpdateA = 0;
+bool PERSON;
 
 int total_speed = 125;
 
@@ -131,7 +132,7 @@ int main(){
 void special_function() {
     int preDataL = 0, preDataA = 0;;
     while (true) {
-        printf("special function %d\n", function_control);
+        //printf("special function %d\n", function_control);
         while (function_control == 0 && preDataL != dataUpdateL) {
             preDataL = dataUpdateL;
             int Center = (X1 + X2) / 2;
@@ -150,6 +151,10 @@ void special_function() {
                 }
                 printf("tar_dir: %f\n", target_dir);
                 car.navi_angle(total_speed, target_dir, 0.3);
+            }
+            printf("Person %d\n", PERSON);
+            while(PERSON == true) {
+                car.stop();
             }
             //function_control = 100;
         } 
@@ -346,6 +351,15 @@ void readData() {
                 }
                 
             }
+            if (state == 5) {
+                if (recv[0] == '1') {
+                    PERSON = true;
+                } else {
+                    PERSON = false;
+                }
+                state = 0;
+            }
+
             if (recv[0] == 'a' && state == 0) {
                 state = 1;
                 read_num = 0;
@@ -364,6 +378,10 @@ void readData() {
                 //printf("\nTX: %d TY: %d TZ: %d RX: %d RY: %d RZ: %d\n", TX, TY, TZ, RX, RY, RZ);
                 //printf("X1: %d X2: %d Y1: %d Y2: %d THETA: %d RHO: %d\n", X1, X2, Y1, Y2, THETA, RHO);
                 state = 0;
+            } else if (recv[0] == 'p' && state == 0) {
+                state = 5;
+                read_num = 0;
+                counter = 0;
             }
             //pc.write(recv, sizeof(recv));
         } 
